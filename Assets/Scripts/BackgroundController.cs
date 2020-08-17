@@ -9,6 +9,7 @@ public class BackgroundController : MonoBehaviour
 
     public int moveVel = 5;
 
+    public PlayerController player;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +19,19 @@ public class BackgroundController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x != endPos.position.x)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, endPos.position, Time.deltaTime * moveVel);
+        
+
+        if (transform.position.x > endPos.position.x)
+        {    
+            Vector3 pos = transform.position;
+            pos.x -=  Time.deltaTime * moveVel;
+            pos.y = (player.transform.position.y + 8.14f) / 3;
+            transform.position = pos;
         }
         else
         {
             transform.position = startPos.position;
         }
+
     }
 }
