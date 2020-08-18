@@ -10,6 +10,12 @@ public class PlatformController : MonoBehaviour
     public int moveVel = 5;
 
     Transform starPosition;
+
+    public Transform[] coinSpawnPositions;
+
+    public GameObject coinPrefab;
+
+    GameObject spawnCoin;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +31,25 @@ public class PlatformController : MonoBehaviour
         }
         else
         {
+            if(spawnCoin != null)
+            {
+                Destroy(spawnCoin);
+            }
             starPosition = spawnPositions[Random.Range(0, spawnPositions.Length)];
             transform.position = starPosition.position;
+
+            int coin = Random.Range(0, 3);
+
+            switch (coin)
+            {
+                case 0:        
+                case 1:
+                    spawnCoin = Instantiate(coinPrefab, coinSpawnPositions[coin].position, Quaternion.identity, transform);
+                    break;
+                case 2:
+                default:
+                    break;
+            }
         }
     }
 }
