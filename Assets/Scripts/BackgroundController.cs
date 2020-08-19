@@ -5,7 +5,7 @@ using UnityEngine;
 public class BackgroundController : MonoBehaviour
 {
     public Transform startPos;
-    public Transform endPos;
+    
 
     public int moveVel = 5;
 
@@ -19,15 +19,16 @@ public class BackgroundController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
-        if (transform.position.x > endPos.position.x)
+
+        if (transform.position.x > GameManager.instance.endPosBG.position.x)
         {    
             Vector3 pos = transform.position;
             pos.x -=  Time.deltaTime * moveVel;
             pos.y = (player.transform.position.y + 8.14f) / 3;
             transform.position = pos;
         }
+
         else
         {
             transform.position = startPos.position;
